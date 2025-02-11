@@ -1,0 +1,10 @@
+#containerInput {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    height: 35px; 
+    justify-content: space-between;
+    border-radius: 20px;
+  }
+  
