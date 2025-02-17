@@ -17,8 +17,39 @@ export const loginUser = async (username, password) => {
   }
 };
 
-const dummyService = () => {
-  loginUser();
+const getAllCategory = async () => {
+  try {
+    const response = await axios.get(`${API}/products/category-list`);
+    return response.data;
+  } catch (error) {
+    return null;
+  }
 };
 
-export default dummyService();
+const getProductsByCategory = async (categorySelected) => {
+  try {
+    const response = await axios.get(
+      `${API}/products/category/${categorySelected}`
+    );
+    return response.data.products;
+  } catch (error) {
+    return null;
+  }
+};
+
+const getDetailProduct = async (productID) => {
+  try {
+    const response = await axios.get(`${API}/products/${productID}`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+export const dummyService = {
+  loginUser,
+  getAllCategory,
+  getProductsByCategory,
+  getDetailProduct
+};

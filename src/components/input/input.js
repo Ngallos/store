@@ -24,9 +24,13 @@ export const InputCustom = ({
             onChange={(val) => onChange({ target: { value: val } })}
             className={classNameCustom}
           />
-          <InputGroup.Button>
-            {icon === true ? <SearchIcon /> : ""}
-          </InputGroup.Button>
+          {icon === true ? (
+            <InputGroup.Button>
+              <SearchIcon />
+            </InputGroup.Button>
+          ) : (
+            ""
+          )}
         </InputGroup>
       </div>
     </div>

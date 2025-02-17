@@ -1,0 +1,9 @@
+.lists{
+    display: flex;
+    border: 1px solid;
+    width: 100%;
+}
+.containerItems{
+    height: 90vh;
+    overflow: auto;
+}

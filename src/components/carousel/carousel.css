@@ -1,0 +1,7 @@
+.rs-carousel {
+    background-color: var(--rs-carousel-bg);
+    height: 400px;
+    width: 300px;
+    overflow: hidden;
+    position: relative;
+}

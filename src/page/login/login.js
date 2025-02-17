@@ -1,34 +1,41 @@
-import { GlobalContext } from "../../context-service/global-contex";
 import { ButtonCustom } from "../../components/button/button";
 import { InputCustom } from "../../components/input/input";
-import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
 import { loginUser } from "../../context-service/dummyJson-api";
+import { TokenContext } from "../../context-service/token";
+import { useContext, useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import "../login/login.css";
 export const Login = () => {
   // eslint-disable-next-line no-unused-vars
-  const { isAuthenticated, setAuthenticated } = useContext(GlobalContext);
+  const navigate = useNavigate();
+  const { setToken, isAuthenticated } = useContext(TokenContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   // eslint-disable-next-line no-unused-vars
-  const [token, setToken] = useState(false);
-  const navigate = useNavigate();
-
   useEffect(() => {
     setError(false);
   }, []);
+
+ if (isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
+
+  const login = (token) => {
+    setToken(token);
+    localStorage.setItem("token", token);
+  };
+
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
     const token = await loginUser(username, password);
     if (token && token !== "invalid") {
-      setToken(token);
-      setAuthenticated(true);
-      localStorage.setItem("token", token);
+      login(token);
       navigate("/home");
     } else {
-      setError("Dati errati");
+      setError("Dati erratis");
     }
   };
 

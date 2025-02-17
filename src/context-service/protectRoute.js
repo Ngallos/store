@@ -1,9 +1,13 @@
-import { Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { TokenContext } from "./token";
+import { NavBar } from "../components/navbar/navbar";
+export const ProtectRoute = ({ children }) => {
+  const { isAuthenticated } = useContext(TokenContext);
 
-export const ProtectRoute = ({ isAuthenticated, children }) => {
-  // useEffect(() => {}, [isAuthenticated]);
-  if (!isAuthenticated) {
-    return <Navigate to="/" />;
-  }
-  return children;
+  return (
+    <div>
+      {isAuthenticated ? <NavBar /> : ""}
+      {children}
+    </div>
+  );
 };
