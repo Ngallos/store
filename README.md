@@ -1,4 +1,4 @@
-Online web-site: https://vercel.com/nazx/store/2wHy4uvN4cb7rNXn4gxsCUJ2tVX6
+Online web-site: https://store-norjggs0v-nazx.vercel.app/
 
 # Getting Started with Create React App
 
