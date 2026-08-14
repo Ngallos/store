@@ -29,3 +29,23 @@
 .button {
   padding-top: 20px;
 }
+
+.credentialsBox {
+  margin-top: 22px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: rgba(79, 70, 229, 0.08);
+  border: 1px solid rgba(79, 70, 229, 0.18);
+  color: #111827;
+  display: grid;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.credentialsLabel {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #4f46e5;
+}

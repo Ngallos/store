@@ -45,6 +45,11 @@ export const Login = () => {
         <p>
           Una pagina di login essenziale, pensata per mostrare il flusso di autenticazione del progetto.
         </p>
+        <div className="credentialsBox">
+          <span className="credentialsLabel">Credenziali demo</span>
+          <strong>Username: emilys</strong>
+          <strong>Password: emilyspass</strong>
+        </div>
       </div>
       <form className="authCard" onSubmit={handleLogin}>
         <h2>Login</h2>
