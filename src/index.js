@@ -4,16 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "rsuite/dist/rsuite.min.css";
-import { ContextProvider } from "./context-service/global-contex";
 import { TokenProvider } from "./context-service/token";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <TokenProvider>
-    <ContextProvider>
+  <Provider store={store}>
+    <TokenProvider>
       <App />
-    </ContextProvider>
-  </TokenProvider>
+    </TokenProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { ListProducts } from "../../components/list/list";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CardCustom } from "../../components/card/card";
 import { dummyService } from "../../context-service/dummyJson-api";
 import "../home/home.css";
-import { GlobalContext } from "../../context-service/global-contex";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/appSlice";
 
 export const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [categoryList, setCategoryList] = useState([]);
   const [itemsByCategory, setItemsByCategory] = useState([]);
-  const [renderIcon, setRenderIcon] = useState(true);
-  const { selectedProductDetail, setSelectedProductDetail } =
-    useContext(GlobalContext);
+  const [activeCategory, setActiveCategory] = useState("");
+  const cartItems = useSelector((state) => state.app.cartItems);
 
   useEffect(() => {
     const getListCategory = async () => {
@@ -26,7 +27,13 @@ export const Home = () => {
     getListCategory();
   }, []);
 
-  useEffect(() => {}, [categoryList]); // Si attiva solo dopo che categoryList è stato aggiornato
+  useEffect(() => {
+    if (categoryList.length > 0 && !activeCategory) {
+      renderListByCategory(categoryList[0]);
+      setActiveCategory(categoryList[0]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryList]);
 
   const getListProductsByCategory = async (categorySelected) => {
     try {
@@ -40,47 +47,67 @@ export const Home = () => {
     }
   };
 
-  useEffect(() => {}, [itemsByCategory]); // Si attiva solo dopo che categoryList è stato aggiornato
-
   const renderListByCategory = async (category) => {
     // Chiamata all'API per ottenere i prodotti per categoria
     await getListProductsByCategory(category);
-    setRenderIcon(true);
-    console.log("Prodotti per categoria:", itemsByCategory);
+    setActiveCategory(category);
   };
 
   const goToDetail = (productID) => {
     navigate(`/home/products/${productID}`);
   };
 
-  //
-  useEffect(() => {}, [selectedProductDetail]);
-
-  useEffect(() => {
-    console.log("Items aggiornati:", itemsByCategory);
-  }, [itemsByCategory]);
+  const addItemToCart = (product) => {
+    dispatch(addToCart(product));
+  };
 
   return (
-    <div className="Home">
-      <div className="lists">
+    <div className="pageShell">
+      <section className="heroBox">
         <div>
+          <p className="eyebrow">React • Redux • API</p>
+          <h1>Store didattico minimale, pulito e leggibile.</h1>
+          <p className="heroText">
+            Un progetto portfolio con categorie, dettaglio prodotto, carrello e stato globale gestito con Redux Toolkit.
+          </p>
+        </div>
+        <div className="heroStats">
+          <div>
+            <strong>{categoryList.length}</strong>
+            <span>categorie</span>
+          </div>
+          <div>
+            <strong>{itemsByCategory.length}</strong>
+            <span>prodotti</span>
+          </div>
+          <div>
+            <strong>{cartItems.length}</strong>
+            <span>nel carrello</span>
+          </div>
+        </div>
+      </section>
+
+      <div className="homeGrid">
+        <aside>
           <ListProducts
             listOfProducts={categoryList}
             onClick={renderListByCategory}
+            activeItem={activeCategory}
           />
-        </div>
-        <div className="containerItems">
+        </aside>
+
+        <main className="containerItems">
           {itemsByCategory.map((product, index) => {
             return (
               <CardCustom
                 key={index}
                 valuesProduct={product}
                 goToDetail={() => goToDetail(product.id)}
-                renderIcon={renderIcon}
-              ></CardCustom>
+                onAddToCart={() => addItemToCart(product)}
+              />
             );
           })}
-        </div>
+        </main>
       </div>
     </div>
   );

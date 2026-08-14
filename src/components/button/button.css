@@ -5,3 +5,88 @@
     border: none;
     cursor: pointer;
 }
+
+.rs-btn.primaryButton,
+.rs-btn.secondaryButton,
+.rs-btn.ghostButton,
+.rs-btn.logoutButton,
+.rs-btn.smallActionButton {
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 600;
+}
+
+.primaryButton,
+.secondaryButton,
+.ghostButton,
+.logoutButton,
+.smallActionButton {
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 600;
+}
+
+.rs-btn.primaryButton,
+.primaryButton {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: #fff;
+    padding: 10px 16px;
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.22);
+}
+
+.rs-btn.secondaryButton,
+.secondaryButton,
+.ghostButton,
+.logoutButton,
+.smallActionButton.ghost {
+    background: #eef2ff;
+    color: #111827;
+    padding: 10px 16px;
+}
+
+.ghostButton {
+    width: auto;
+}
+
+.rs-btn.logoutButton,
+.logoutButton {
+    width: auto;
+    background: #111827;
+    color: white;
+}
+
+.rs-btn.smallActionButton,
+.smallActionButton {
+    background: #111827;
+    color: white;
+    padding: 8px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: auto;
+}
+
+.rs-btn.smallActionButton.ghost,
+.smallActionButton.ghost {
+    background: white;
+    color: #111827;
+    border: 1px solid #d1d5db;
+}
+
+.rs-btn.primaryButton:hover,
+.rs-btn.secondaryButton:hover,
+.rs-btn.ghostButton:hover,
+.rs-btn.logoutButton:hover,
+.rs-btn.smallActionButton:hover,
+.primaryButton:hover,
+.secondaryButton:hover,
+.ghostButton:hover,
+.logoutButton:hover,
+.smallActionButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(17, 24, 39, 0.12);
+}

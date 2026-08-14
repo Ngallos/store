@@ -5,6 +5,9 @@ export const CarouselComponent = ({ itemsCarousel }) => {
 
   return (
     <Carousel className="custom-slider">
+      {!itemsCarousel || itemsCarousel.length === 0 ? (
+        <div className="carouselEmpty">Nessuna immagine disponibile</div>
+      ) : null}
       {itemsCarousel?.map((item, index) => {
         return <img key={index} src={item} alt={item} />;
       })}

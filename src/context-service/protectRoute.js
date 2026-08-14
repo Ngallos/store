@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import { TokenContext } from "./token";
 import { NavBar } from "../components/navbar/navbar";
 export const ProtectRoute = ({ children }) => {
@@ -6,8 +7,14 @@ export const ProtectRoute = ({ children }) => {
 
   return (
     <div>
-      {isAuthenticated ? <NavBar /> : ""}
-      {children}
+      {isAuthenticated ? (
+        <>
+          <NavBar />
+          {children}
+        </>
+      ) : (
+        <Navigate to="/login" />
+      )}
     </div>
   );
 };

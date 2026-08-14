@@ -7,7 +7,6 @@ import {
 import { ProtectRoute } from "../context-service/protectRoute";
 import { Login } from "../page/login/login";
 import { Home } from "../page/home/home";
-import { Landing } from "../page/landing/landing";
 import { DetailProduct } from "../page/detail-product/detail-products";
 import { useContext } from "react";
 import { TokenContext } from "../context-service/token";
@@ -20,7 +19,11 @@ export const RoutesApplication = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route
+          path="/"
+          element={<Navigate to={isAuthenticated ? "/home" : "/login"} />}
+        />
+        <Route path="/landing" element={<Navigate to="/login" />} />
         <Route
           path="/login"
           element={isAuthenticated ? <Navigate to="/home" /> : <Login />}

@@ -1,33 +1,41 @@
-import { useEffect } from "react";
 import { Card, Text } from "rsuite";
 import ArrowRightLineIcon from '@rsuite/icons/ArrowRightLine';
+import PlusIcon from '@rsuite/icons/Plus';
 import "../card/card.css";
+import { capitalizeWords } from "../../utils/text";
 
-export const CardCustom = ({ valuesProduct, goToDetail }) => {
-  useEffect(() => {
-    console.log(valuesProduct);
-  }, [valuesProduct]);
-
+export const CardCustom = ({ valuesProduct, goToDetail, onAddToCart }) => {
   return (
-    <Card width={320}>
-      <Card.Header as="h5">{valuesProduct.title}</Card.Header>
+    <Card className="productCard">
+      <Card.Header as="h5">{capitalizeWords(valuesProduct.title)}</Card.Header>
       <Card.Body>
-        <div>
-          <div>
-            {valuesProduct.images && valuesProduct.images.length > 0 ? (
-              <img className="images" src={valuesProduct.images[0]} alt="" />
-            ) : (
-              "Immagine non disponibile"
-            )}
-          </div>
+        <div className="cardMedia">
+          {valuesProduct.images && valuesProduct.images.length > 0 ? (
+            <img className="images" src={valuesProduct.images[0]} alt="" />
+          ) : (
+            <div className="imagePlaceholder">Immagine non disponibile</div>
+          )}
         </div>
-        <div>{valuesProduct.description}</div>
-        <div>{valuesProduct.tags}</div>
+        <div className="cardDescription">{valuesProduct.description}</div>
+        <div className="cardTags">
+          {valuesProduct.tags?.map((tag) => capitalizeWords(tag)).join(", ")}
+        </div>
       </Card.Body>
       <Card.Footer>
-        <div className="footerContainer" onClick={goToDetail}>
-          <Text muted>{valuesProduct.meta.createdAt}</Text>
-            <div style={{cursor: 'pointer'}}><ArrowRightLineIcon/></div>
+        <div className="footerContainer">
+          <Text muted>{valuesProduct.meta?.createdAt}</Text>
+          <div className="cardActions">
+            {onAddToCart ? (
+              <button className="smallActionButton" onClick={onAddToCart} type="button">
+                <PlusIcon />
+                Carrello
+              </button>
+            ) : null}
+            <button className="smallActionButton ghost" onClick={goToDetail} type="button">
+              Dettaglio
+              <ArrowRightLineIcon />
+            </button>
+          </div>
         </div>
       </Card.Footer>
     </Card>

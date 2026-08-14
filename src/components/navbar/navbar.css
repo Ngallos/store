@@ -1,4 +1,43 @@
 .img{
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 22px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.brandBox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brandTitle {
+    font-weight: 700;
+    color: #111827;
+}
+
+.brandSubtitle {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.navLinks {
+    display: flex;
+    gap: 10px;
+}
+
+.navActions {
+    display: flex;
+    gap: 10px;
+}
+
     width: 65px;
     height: 60px;
 }

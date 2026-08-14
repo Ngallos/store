@@ -6,19 +6,17 @@ import { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import "../login/login.css";
 export const Login = () => {
-  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
   const { setToken, isAuthenticated } = useContext(TokenContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  // eslint-disable-next-line no-unused-vars
   useEffect(() => {
-    setError(false);
+    setError(null);
   }, []);
 
- if (isAuthenticated) {
-    return <Navigate to="/login" />;
+  if (isAuthenticated) {
+    return <Navigate to="/home" />;
   }
 
   const login = (token) => {
@@ -40,33 +38,33 @@ export const Login = () => {
   };
 
   return (
-    <div id="containerLogin">
-      <div style={{ position: "absolute", top: "40px", fontSize: "40px" }}>
-        Frignazzon
+    <div className="authPage">
+      <div className="authHero">
+        <p className="eyebrow">Progetto didattico</p>
+        <h1>Accedi al tuo store demo.</h1>
+        <p>
+          Una pagina di login essenziale, pensata per mostrare il flusso di autenticazione del progetto.
+        </p>
       </div>
-      <div>
-        <form onSubmit={handleLogin}>
-          <div className="containerForm">
-            <div>Login</div>
-            <InputCustom
-              value={username}
-              type={"text"}
-              placeholder="Username"
-              onChange={(e) => setUsername(e.target.value)}
-            ></InputCustom>
-            <InputCustom
-              value={password}
-              type={"text"}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            ></InputCustom>
-            {error ? <p className="error">{error}</p> : ""}
-            <div className="button">
-              <ButtonCustom type={"submit"} title="Accedi"></ButtonCustom>
-            </div>
-          </div>
-        </form>
-      </div>
+      <form className="authCard" onSubmit={handleLogin}>
+        <h2>Login</h2>
+        <InputCustom
+          value={username}
+          type={"text"}
+          placeholder="Username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <InputCustom
+          value={password}
+          type={"password"}
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {error ? <p className="error">{error}</p> : null}
+        <div className="button">
+          <ButtonCustom type={"submit"} title="Accedi" customClass="primaryButton" />
+        </div>
+      </form>
     </div>
   );
 };
